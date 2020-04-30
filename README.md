@@ -4,4 +4,4 @@ This is my attempt on the [Advent of Code calendar of 2019](https://adventofcode
 
 Each day on the calendar is answered on its own branch.
 
-Using *Java 8* as the primary language.
+Using **Java 8** as the primary language.
