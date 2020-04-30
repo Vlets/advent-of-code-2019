@@ -13,21 +13,37 @@ public class FuelRequirement {
         Scanner scanner = FileHelper.scanFile(inputFile);
 
         int q1_answer = 0;
+        int q2_answer = 0;
+        Double temp = 0.0;
 
-        while(scanner.hasNext()){
-            q1_answer += calculateFuelRequiredForSanta(Integer.parseInt(scanner.next()));
+        if (scanner != null) {
+            while(scanner.hasNext()){
+                temp = Double.parseDouble(scanner.next());
+                q1_answer += calculateFuelRequiredForSanta(temp);
+                q2_answer += calculateAllTheFuels(temp);
+            }
         }
 
-        System.out.println(q1_answer);
+        System.out.println("This is all you need to run for now: " + q1_answer);
+        System.out.println("ALL THE FUELS!: " + q2_answer);
 
     }
 
-    private static int calculateFuelRequiredForSanta (int number){
-        double result = Math.floor(number / 3);
-        if (result<=1){
+    private static int calculateFuelRequiredForSanta (double number){
+        double result = Math.floor(number / 3) - 2;
+        if (result<=0){
             return 0;
         } else {
-            return (int) result - 2;
+            return (int) result;
+        }
+    }
+
+    private static int calculateAllTheFuels (double number){
+        double result = Math.floor(number / 3) - 2;
+        if (result<=0){
+            return 0;
+        } else {
+            return (int) result + calculateAllTheFuels((int) result);
         }
     }
 
