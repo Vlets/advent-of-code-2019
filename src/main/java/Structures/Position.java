@@ -17,7 +17,6 @@ public class Position<X,Y> implements Serializable {
     public Position(@NamedArg("horizontal") X x, @NamedArg("vertical") Y y) {
         this.horizontal = x;
         this.vertical = y;
-        List list = new ArrayList();
     }
 
     /**

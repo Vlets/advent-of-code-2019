@@ -24,6 +24,7 @@ public class CrossedWires {
         List<Position<Integer, Integer>> wireOneCoordinates = calculatePath(inputArrayWireOne);
         List<Position<Integer, Integer>> wireTwoCoordinates = calculatePath(inputArrayWireTwo);
 
+        wireOneCoordinates.retainAll(wireTwoCoordinates);
 
     }
 
@@ -39,12 +40,24 @@ public class CrossedWires {
             distance = Integer.parseInt(instruction.substring(1));
 
             if (direction.equals("L")) {
+                for (int x = currentX; x>currentX-distance; x--){
+                    wireCoordinates.add(new Position<>(x, currentY));
+                }
                 currentX -= distance;
             } else if (direction.equals("R")) {
+                for (int x = currentX; x<currentX+distance; x++){
+                    wireCoordinates.add(new Position<>(x, currentY));
+                }
                 currentX += distance;
             } else if (direction.equals("U")) {
+                for (int y = currentY; y<currentY+distance; y++){
+                    wireCoordinates.add(new Position<>(currentX, y));
+                }
                 currentY += distance;
             } else if (direction.equals("D")) {
+                for (int y = currentY; y>currentY-distance; y--){
+                    wireCoordinates.add(new Position<>(currentX, y));
+                }
                 currentY -= distance;
             } else {
                 log.warning("Direction string not correct. Please check the input.");
