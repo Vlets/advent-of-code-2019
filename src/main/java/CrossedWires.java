@@ -1,7 +1,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.Scanner;
 import java.util.logging.Logger;
@@ -19,16 +19,24 @@ public class CrossedWires {
         Scanner scanner = FileHelper.scanFile(inputFile);
 
         assert scanner != null;
+
+        int result = getPartOneResult(scanner);
+        System.out.println("Part 1 result: " + result);
+
+    }
+
+    static int getPartOneResult(final Scanner scanner) {
         String[] inputArrayWireOne = scanner.next().split(",");
         String[] inputArrayWireTwo = scanner.next().split(",");
         List<Position<Integer, Integer>> wireOneCoordinates = calculatePath(inputArrayWireOne);
         List<Position<Integer, Integer>> wireTwoCoordinates = calculatePath(inputArrayWireTwo);
 
         wireOneCoordinates.retainAll(wireTwoCoordinates);
-
+        wireOneCoordinates.remove(0);
+        return Collections.min(getManhattanDistanceFromCollection(wireOneCoordinates));
     }
 
-    static List<Position<Integer, Integer>> calculatePath(String[] inputArray) {
+    private static List<Position<Integer, Integer>> calculatePath(String[] inputArray) {
         List<Position<Integer, Integer>> wireCoordinates = new ArrayList<>();
         String direction;
         int distance;
@@ -66,6 +74,18 @@ public class CrossedWires {
             wireCoordinates.add(new Position<>(currentX, currentY));
         }
         return wireCoordinates;
+    }
+
+    static int getManhattanDistance(Position<Integer, Integer> coordinates){
+        return Math.abs(coordinates.getHorizontal()) + Math.abs(coordinates.getVertical());
+    }
+
+    private static List<Integer> getManhattanDistanceFromCollection(List<Position<Integer, Integer>> intersections){
+        List<Integer> resultList = new ArrayList<>();
+        for (Position<Integer,Integer> coord : intersections){
+            resultList.add(CrossedWires.getManhattanDistance(coord));
+        }
+        return resultList;
     }
 
 
