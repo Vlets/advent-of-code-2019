@@ -20,8 +20,11 @@ public class CrossedWires {
 
         assert scanner != null;
 
-        int result = getPartOneResult(scanner);
-        System.out.println("Part 1 result: " + result);
+//        int result = getPartOneResult(scanner);
+//        System.out.println("Part 1 result: " + result);
+
+        int result = getPartTwoResult(scanner);
+        System.out.println("Part 2 result: " + result);
 
     }
 
@@ -34,6 +37,19 @@ public class CrossedWires {
         wireOneCoordinates.retainAll(wireTwoCoordinates);
         wireOneCoordinates.remove(0);
         return Collections.min(getManhattanDistanceFromCollection(wireOneCoordinates));
+    }
+
+    static int getPartTwoResult(final Scanner scanner) {
+        String[] inputArrayWireOne = scanner.next().split(",");
+        String[] inputArrayWireTwo = scanner.next().split(",");
+        List<Position<Integer, Integer>> wireOneCoordinates = calculatePath(inputArrayWireOne);
+        List<Position<Integer, Integer>> wireTwoCoordinates = calculatePath(inputArrayWireTwo);
+
+        List<Position<Integer, Integer>> intersections = new ArrayList<>(wireOneCoordinates);
+        intersections.retainAll(wireTwoCoordinates);
+        intersections.remove(0);
+
+        return wireOneCoordinates.indexOf(intersections.get(0)) + wireTwoCoordinates.indexOf(intersections.get(0));
     }
 
     private static List<Position<Integer, Integer>> calculatePath(String[] inputArray) {
@@ -71,7 +87,6 @@ public class CrossedWires {
                 log.warning("Direction string not correct. Please check the input.");
             }
 
-            wireCoordinates.add(new Position<>(currentX, currentY));
         }
         return wireCoordinates;
     }
