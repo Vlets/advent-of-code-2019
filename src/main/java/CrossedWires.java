@@ -49,7 +49,12 @@ public class CrossedWires {
         intersections.retainAll(wireTwoCoordinates);
         intersections.remove(0);
 
-        return wireOneCoordinates.indexOf(intersections.get(0)) + wireTwoCoordinates.indexOf(intersections.get(0));
+        List<Integer> results = new ArrayList<>();
+        for (Position<Integer, Integer> intersection : intersections){
+            results.add(wireOneCoordinates.indexOf(intersection) + wireTwoCoordinates.indexOf(intersection));
+        }
+
+        return Collections.min(results);
     }
 
     private static List<Position<Integer, Integer>> calculatePath(String[] inputArray) {
