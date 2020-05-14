@@ -9,6 +9,20 @@
     <description>Advent of Code 2019</description>
     <version>0.1-SNAPSHOT</version>
 
+    <developers>
+        <developer>
+            <id>Vlets</id>
+            <name>George Vletsas</name>
+            <email>georgevle93@gmail.com</email>
+        </developer>
+    </developers>
+
+    <inceptionYear>2020</inceptionYear>
+
+    <properties>
+        <junit.version>5.4.2</junit.version>
+        <surefireplugin.version>2.22.1</surefireplugin.version>
+    </properties>
 
     <build>
         <plugins>
@@ -20,13 +34,27 @@
                     <target>1.8</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${surefireplugin.version}</version>
+            </plugin>
         </plugins>
     </build>
 
-    <properties>
-    </properties>
-
     <dependencies>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <version>${junit.version}</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
 
 </project>
